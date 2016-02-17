@@ -95,6 +95,7 @@
     <Compile Include="Converters\ProjectedCostConverter.cs" />
     <Compile Include="Converters\TotalSpentConverter.cs" />
     <Compile Include="CurrentSelection.cs" />
+    <Compile Include="enums.cs" />
     <Compile Include="FfxiahItem.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="Interaction.cs" />
@@ -129,24 +130,6 @@
     <Compile Include="NumericSpinnerControl.cs" />
     <Compile Include="Converters\AhParseButtonConverter.cs" />
     <Compile Include="Modes.cs" />
-    <Compile Include="ffacetools\Chat.cs" />
-    <Compile Include="ffacetools\enums.cs" />
-    <Compile Include="ffacetools\FFACETools.cs" />
-    <Compile Include="ffacetools\Fish.cs" />
-    <Compile Include="ffacetools\Imports.cs" />
-    <Compile Include="ffacetools\Item.cs" />
-    <Compile Include="ffacetools\Menu.cs" />
-    <Compile Include="ffacetools\Navigator.cs" />
-    <Compile Include="ffacetools\NPC.cs" />
-    <Compile Include="ffacetools\ParseResources.cs" />
-    <Compile Include="ffacetools\Party.cs" />
-    <Compile Include="ffacetools\PartyMember.cs" />
-    <Compile Include="ffacetools\Player.cs" />
-    <Compile Include="ffacetools\Search.cs" />
-    <Compile Include="ffacetools\Structures.cs" />
-    <Compile Include="ffacetools\Target.cs" />
-    <Compile Include="ffacetools\Timer.cs" />
-    <Compile Include="ffacetools\Windower.cs" />
     <Compile Include="FFXIAH.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -207,15 +190,9 @@
     <Resource Include="images\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ffacetools\ChangeLog.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="ahresources.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="FFACE.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="images\ffxiah.jpg" />
     <Content Include="SharpCompress.3.5.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
