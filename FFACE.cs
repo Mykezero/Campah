@@ -1,3 +1,4 @@
+using EliteMMO.API;
 using FFACETools;
 using System.Drawing;
 
@@ -5,11 +6,16 @@ namespace CampahApp
 {
     public class FFACE
     {
-        private readonly int id;
-
         public FFACE(int id)
         {
-            this.id = id;
+            var eliteApi = new EliteAPI(id);
+            Chat = new ChatTools(eliteApi);
+            Item = new ItemTools(eliteApi);
+            Menu = new MenuTools(eliteApi);
+            NPC = new NPCTools(eliteApi);
+            Player = new PlayerTools(eliteApi);
+            Target = new TargetTools(eliteApi);
+            Windower = new WindowerTools(eliteApi);
         }
 
         public ChatTools Chat { get; set; }
@@ -22,6 +28,13 @@ namespace CampahApp
 
         public class ChatTools
         {
+            private readonly EliteAPI _eliteApi;
+
+            public ChatTools(EliteAPI eliteApi)
+            {
+                _eliteApi = eliteApi;
+            }
+
             public ChatLine GetNextLine()
             {
                 throw new System.NotImplementedException();
@@ -39,6 +52,13 @@ namespace CampahApp
 
         public class MenuTools
         {
+            private readonly EliteAPI _eliteApi;
+
+            public MenuTools(EliteAPI eliteApi)
+            {
+                _eliteApi = eliteApi;
+            }
+
             public bool IsOpen { get; set; }
             public int MenuIndex { get; set; }
             public string Selection { get; set; }
@@ -57,6 +77,13 @@ namespace CampahApp
 
         public class WindowerTools
         {
+            private readonly EliteAPI _eliteApi;
+
+            public WindowerTools(EliteAPI eliteApi)
+            {
+                _eliteApi = eliteApi;
+            }
+
             public void SendKeyPress(KeyCode escapeKey)
             {
                 throw new System.NotImplementedException();
@@ -71,6 +98,13 @@ namespace CampahApp
 
     public class ItemTools
     {
+        private readonly EliteAPI _eliteApi;
+
+        public ItemTools(EliteAPI eliteApi)
+        {
+            _eliteApi = eliteApi;
+        }
+
         public int InventoryCount { get; set; }
         public int InventoryMax { get; set; }
 
@@ -82,6 +116,13 @@ namespace CampahApp
 
     public class NPCTools
     {
+        private readonly EliteAPI _eliteApi;
+
+        public NPCTools(EliteAPI eliteApi)
+        {
+            _eliteApi = eliteApi;
+        }
+
         public double Distance(short id)
         {
             throw new System.NotImplementedException();
@@ -90,11 +131,25 @@ namespace CampahApp
 
     public class PlayerTools
     {
+        private readonly EliteAPI _eliteApi;
+
+        public PlayerTools(EliteAPI eliteApi)
+        {
+            _eliteApi = eliteApi;
+        }
+
         public int GetSID { get; set; }
     }
 
     public class TargetTools
     {
+        private readonly EliteAPI _eliteApi;
+
+        public TargetTools(EliteAPI eliteApi)
+        {
+            _eliteApi = eliteApi;
+        }
+
         public short ID { get; set; }
         public string Name { get; set; }
     }
