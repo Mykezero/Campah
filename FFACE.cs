@@ -37,7 +37,18 @@ namespace CampahApp
 
             public ChatLine GetNextLine()
             {
-                throw new System.NotImplementedException();
+                var message = _eliteApi.Chat.GetNextChatLine();
+
+                var chatLine = new ChatLine
+                {
+                    Color = message.ChatColor,
+                    Now = message.Timestamp.ToShortTimeString(),
+                    RawString = message.RawText,
+                    Text = message.Text,
+                    Type = (ChatMode) message.ChatType
+                };
+
+                return chatLine;
             }
 
             public class ChatLine
@@ -59,19 +70,25 @@ namespace CampahApp
                 _eliteApi = eliteApi;
             }
 
-            public bool IsOpen { get; set; }
-            public int MenuIndex { get; set; }
-            public string Selection { get; set; }
+            public bool IsOpen => _eliteApi.Menu.IsMenuOpen;
+
+            public int MenuIndex
+            {
+                get { return _eliteApi.Menu.MenuIndex; }
+                set { _eliteApi.Menu.MenuIndex = value; }
+            }
+
+            public string Selection => _eliteApi.Menu.MenuName;
         }
 
         public class ParseResources
         {
-            public static object LanguagePreference { get; set; }
-            public static bool UseFFXIDatFiles { get; set; }
+            public static int LanguagePreference = 1;
+            public static bool UseFFXIDatFiles = true;
 
             public class Languages
             {
-                public static object English { get; set; }
+                public static int English = 1;
             }
         }
 
@@ -86,18 +103,19 @@ namespace CampahApp
 
             public void SendKeyPress(KeyCode escapeKey)
             {
-                throw new System.NotImplementedException();
+                _eliteApi.ThirdParty.KeyPress((byte)escapeKey);
             }
 
-            public void SendString(string mouseBlockinputOffKeyboardBlockinputOff)
+            public void SendString(string message)
             {
-                throw new System.NotImplementedException();
+                _eliteApi.ThirdParty.SendString(message);
             }
         }
     }
 
     public class ItemTools
     {
+        private const int InventoryId = 0;
         private readonly EliteAPI _eliteApi;
 
         public ItemTools(EliteAPI eliteApi)
@@ -105,12 +123,12 @@ namespace CampahApp
             _eliteApi = eliteApi;
         }
 
-        public int InventoryCount { get; set; }
-        public int InventoryMax { get; set; }
+        public int InventoryCount => _eliteApi.Inventory.GetContainerCount(InventoryId);
+        public int InventoryMax => _eliteApi.Inventory.GetContainerMaxCount(InventoryId);
 
-        public void GetInventoryItemCount(ushort id)
+        public int GetInventoryItemCount(ushort id)
         {
-            throw new System.NotImplementedException();
+            return (int)_eliteApi.Inventory.GetContainerItem(InventoryId, id).Count;
         }
     }
 
@@ -125,7 +143,7 @@ namespace CampahApp
 
         public double Distance(short id)
         {
-            throw new System.NotImplementedException();
+            return _eliteApi.Entity.GetEntity(id).Distance;
         }
     }
 
@@ -138,7 +156,7 @@ namespace CampahApp
             _eliteApi = eliteApi;
         }
 
-        public int GetSID { get; set; }
+        public int GetSID => _eliteApi.Player.ServerId;
     }
 
     public class TargetTools
@@ -150,7 +168,7 @@ namespace CampahApp
             _eliteApi = eliteApi;
         }
 
-        public short ID { get; set; }
-        public string Name { get; set; }
+        public short ID => (short)_eliteApi.Target.GetTargetInfo().TargetId;
+        public string Name => _eliteApi.Target.GetTargetInfo().TargetName;
     }
 }
