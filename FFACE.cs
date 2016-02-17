@@ -39,6 +39,8 @@ namespace CampahApp
             {
                 var message = _eliteApi.Chat.GetNextChatLine();
 
+                if (message == null) return null;
+
                 var chatLine = new ChatLine
                 {
                     Color = message.ChatColor,
